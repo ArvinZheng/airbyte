@@ -35,7 +35,7 @@ ENV VERSION ${VERSION}
 WORKDIR /app
 
 # Move worker app
-ADD build/docker/bin/${APPLICATION}-${VERSION}.tar /app
+ADD bin/${APPLICATION}-${VERSION}.tar /app
 
 # wait for upstream dependencies to become available before starting server
 ENTRYPOINT ["/bin/bash", "-c", "${APPLICATION}-${VERSION}/bin/${APPLICATION}"]
