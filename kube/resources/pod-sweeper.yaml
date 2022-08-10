@@ -61,11 +61,13 @@ spec:
     metadata:
       labels:
         airbyte: pod-sweeper
+        use-default-egress-policy: "true"
+        allow-to-apiserver: "true"
     spec:
       serviceAccountName: airbyte-admin
       containers:
         - name: airbyte-pod-sweeper
-          image: bitnami/kubectl
+          image: docker-horizon-snapshot.dr-uw2.adobeitc.com/azheng/bitnami/kubectl
           imagePullPolicy: IfNotPresent
           env:
             - name: KUBE_NAMESPACE
@@ -82,3 +84,5 @@ spec:
           configMap:
             name: sweep-pod-script
             defaultMode: 0755
+      imagePullSecrets:
+        - name: docker-horizon-snapshot

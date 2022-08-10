@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: airbyte-server-svc
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - port: 8001
       protocol: TCP
@@ -23,10 +23,12 @@ spec:
     metadata:
       labels:
         airbyte: server
+        use-default-egress-policy: "true"
+        allow-to-apiserver: "true"
     spec:
       containers:
         - name: airbyte-server-container
-          image: airbyte/server
+          image: docker-horizon-snapshot.dr-uw2.adobeitc.com/azheng/airbyte/server
           env:
             - name: AIRBYTE_VERSION
               valueFrom:
